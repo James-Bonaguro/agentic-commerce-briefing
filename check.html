@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent-Ready Store Check</title>
+<meta name="description" content="Ten yes-or-no questions, about fifteen minutes. Find out whether an AI shopping assistant can describe and sell your product correctly, and which fix to make first.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Can an AI assistant sell your product? A 15-minute check">
+<meta property="og:description" content="Ten yes-or-no questions for store owners. You get a short list of fixes, most important first. Free, nothing to sign up for.">
+<meta property="og:url" content="https://james-bonaguro.github.io/agentic-commerce-briefing/check.html">
+<meta property="og:image" content="https://james-bonaguro.github.io/agentic-commerce-briefing/og-check.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111922'/%3E%3Cpath d='M8 17l5 5 11-12' stroke='%23F6F7F5' stroke-width='3.5' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts.css">
+<style>
+
+:root{
+  --paper:#F6F7F5;--ink:#111922;--ink-2:#36424D;--ink-3:#55616C;--rule:#9AA4AC;--hair:#D3D9DD;
+  --fc:#1B46B0;--fc-tint:#DCE3F4;--yes:#1E6B47;--no:#A3361F;
+  --f-ui:"Archivo","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --maxw:920px;--gut:40px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration-color:var(--rule);text-underline-offset:.22em;}
+a:hover{text-decoration-color:var(--ink);}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+h1,h2,h3{font-family:var(--f-ui);margin:0;text-wrap:balance;}
+p{margin:0 0 1em;text-wrap:pretty;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);}
+.ui{font-family:var(--f-ui);}
+
+.top{padding-top:28px;}
+.top .bar{border-top:4px solid var(--ink);}
+.crumb{font-family:var(--f-ui);font-size:14px;color:var(--ink-2);padding-top:12px;}
+h1{font-size:clamp(44px,7vw,78px);line-height:.92;font-weight:800;font-stretch:66%;letter-spacing:-.02em;margin-top:30px;}
+.sub{font-size:21px;line-height:1.5;color:var(--ink-2);max-width:40ch;margin:22px 0 0;}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:36px;font-family:var(--f-ui);font-size:14.5px;line-height:1.4;color:var(--ink-2);}
+.how span{padding:11px 16px 12px 0;}
+.how span+span{padding-left:16px;border-left:1px solid var(--hair);}
+.how b{color:var(--ink);font-weight:650;}
+
+.why{margin:56px 0 0;max-width:62ch;font-size:19px;}
+.why p:last-child{margin:0;}
+
+ol.qs{list-style:none;margin:56px 0 0;padding:0;counter-reset:q;}
+.q{border-top:1px solid var(--ink);padding:20px 0 30px;counter-increment:q;display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 18px;}
+.q::before{content:counter(q,decimal-leading-zero);font-family:var(--f-ui);font-weight:750;font-stretch:70%;font-size:30px;line-height:1;color:var(--ink-3);}
+.q.done::before{color:var(--ink);}
+.q h2{font-size:23px;line-height:1.2;font-weight:700;font-stretch:80%;letter-spacing:-.005em;}
+.q .tag{display:inline-block;font-family:var(--f-ui);font-size:13px;font-weight:600;color:var(--fc);margin-bottom:6px;letter-spacing:.02em;text-transform:uppercase;}
+.q .w{font-size:16.5px;line-height:1.55;color:var(--ink-2);margin:10px 0 0;max-width:60ch;}
+.q .chk{font-family:var(--f-ui);font-size:15px;line-height:1.45;color:var(--ink-2);margin:10px 0 0;max-width:62ch;}
+.q .chk b{color:var(--ink);font-weight:650;}
+.q .src{font-family:var(--f-ui);font-size:13.5px;color:var(--ink-3);margin-top:8px;}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.opts label{position:relative;cursor:pointer;}
+.opts input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;}
+.opts span{display:block;font-family:var(--f-ui);font-size:15px;font-weight:600;padding:9px 16px 10px;border:1px solid var(--rule);background:transparent;color:var(--ink);min-width:84px;text-align:center;transition:background .15s,border-color .15s,color .15s;}
+.opts label:hover span{border-color:var(--ink);}
+.opts input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px;}
+.opts input[value=yes]:checked+span{background:var(--yes);border-color:var(--yes);color:#fff;}
+.opts input[value=no]:checked+span{background:var(--no);border-color:var(--no);color:#fff;}
+.opts input[value=unsure]:checked+span,.opts input[value=na]:checked+span{background:var(--ink-2);border-color:var(--ink-2);color:#fff;}
+
+.result{border-top:4px solid var(--ink);margin-top:40px;padding-top:22px;}
+.result h2{font-size:clamp(32px,4.4vw,46px);line-height:1;font-weight:750;font-stretch:70%;letter-spacing:-.012em;}
+.score{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-top:22px;}
+.score .n{font-family:var(--f-ui);font-size:84px;line-height:.85;font-weight:800;font-stretch:66%;font-variant-numeric:tabular-nums;}
+.score .of{font-family:var(--f-ui);font-size:17px;color:var(--ink-2);max-width:40ch;line-height:1.4;}
+.meter{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:20px;}
+.meter i{height:10px;background:var(--hair);}
+.meter i.yes{background:var(--yes);}
+.meter i.no{background:var(--no);}
+.meter i.unsure{background:var(--ink-3);}
+.first{margin-top:34px;border:2px solid var(--ink);padding:20px 22px 22px;background:#fff;}
+.first .lbl{font-family:var(--f-ui);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--no);}
+.first h3{font-size:24px;line-height:1.2;font-weight:700;font-stretch:80%;margin-top:6px;}
+.first p{margin:10px 0 0;font-size:17px;}
+.fixes{margin:30px 0 0;padding:0;list-style:none;border-top:1px solid var(--hair);}
+.fixes li{display:grid;grid-template-columns:minmax(0,1fr);padding:14px 0 15px;border-bottom:1px solid var(--hair);}
+.fixes b{font-family:var(--f-ui);font-weight:650;font-size:16.5px;}
+.fixes span{font-size:16px;color:var(--ink-2);margin-top:2px;}
+.fixes .u b::before{content:"Not sure yet. Check this first";display:block;font-weight:600;color:var(--ink-3);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px;}
+.empty{font-family:var(--f-ui);font-size:16px;color:var(--ink-2);margin-top:20px;}
+.watch{margin-top:34px;font-size:16.5px;color:var(--ink-2);max-width:62ch;border-left:3px solid var(--fc);padding-left:16px;}
+.watch b{color:var(--ink);font-family:var(--f-ui);}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;}
+button{font-family:var(--f-ui);font-size:15px;font-weight:650;padding:11px 18px 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;}
+button.ghost{background:transparent;color:var(--ink);}
+button:hover{opacity:.88;}
+.copied{font-family:var(--f-ui);font-size:14px;color:var(--yes);align-self:center;min-height:1em;}
+
+.honest{margin-top:64px;border-top:1px solid var(--ink);padding-top:16px;font-size:16px;color:var(--ink-2);max-width:66ch;}
+.honest h3{font-size:18px;font-weight:700;font-stretch:80%;color:var(--ink);margin-bottom:8px;}
+footer{margin:56px 0 64px;font-family:var(--f-ui);font-size:14px;color:var(--ink-3);border-top:1px solid var(--hair);padding-top:14px;}
+
+@media (max-width:640px){
+  :root{--gut:16px;}
+  body{font-size:17px;}
+  .sub{font-size:19px;}
+  .how{grid-template-columns:1fr;}
+  .how span+span{padding-left:0;border-left:0;border-top:1px solid var(--hair);}
+  .q{grid-template-columns:1fr;}
+  .q::before{font-size:22px;margin-bottom:8px;}
+  .opts span{min-width:0;padding:9px 13px 10px;}
+  .score .n{font-size:68px;}
+}
+@media print{
+  .opts label:not(:has(input:checked)){display:none;}
+  .actions,.crumb{display:none;}
+  .q{break-inside:avoid;padding:10px 0 14px;}
+  .result{break-before:page;}
+}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <div class="bar"></div>
+  <div class="crumb"><a href="./">Agentic commerce briefing</a> / Store check</div>
+  <h1>Can an AI assistant sell your product?</h1>
+  <p class="sub">Ten yes-or-no questions for anyone who sells online. You end with a short list of fixes, the most important one first.</p>
+  <div class="how">
+    <span><b>About 15 minutes</b> with your site open in another tab</span>
+    <span><b>Nothing to sign up for.</b> Your answers stay in this browser</span>
+    <span><b>Every check is free</b> and needs no developer</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="why">
+    <p>Shoppers are starting to ask an assistant instead of searching. Google now runs one cart across Search and Gemini. Walmart lets approved outside agents buy for its customers. Meta, Anthropic and others have released assistants that can check out with the shopper's OK.</p>
+    <p>None of them can look at your product the way a person does. They read what is written down. When the price, stock or name is missing, or differs from one place to the next, they skip you or get you wrong. Most of the fixes are small, and they help ordinary search and real customers too.</p>
+  </div>
+
+  <ol class="qs" id="qs"></ol>
+
+  <section class="result" id="result" aria-live="polite"></section>
+
+  <div class="honest">
+    <h3>What this is and isn't</h3>
+    <p>A self-check, not a measurement. It tells you whether the basics an assistant relies on are in place. It can't tell you how often an assistant recommends you, and it doesn't predict sales. Very few purchases happen through agents today. The reason to fix these now is that they're cheap, they help today's search and customers, and the businesses that are easy to describe accurately are the ones assistants will pick as this grows.</p>
+    <p>Each question links to the public news it's based on. The full, sourced picture is in the <a href="./#moving">briefing</a>.</p>
+  </div>
+</main>
+
+<footer class="wrap">Part of the <a href="./">Agentic commerce briefing</a>. Sources are linked on each question.</footer>
+
+<script>
+/* Each question: what to check, why it matters, and the one-line fix if the answer is no.
+   rank: lower = fix sooner. Keep every "why" tied to something public and sourced. */
+const Q = [
+  { id:"price", rank:1, tag:"Product pages",
+    q:"Is the price on every product page written as text, not only inside an image or a button?",
+    why:"An assistant reads the page's words. A price that lives only in a picture, or appears only after someone clicks, is a price it can't see.",
+    check:"<b>How to check:</b> open a product page and try to highlight the price with your cursor. If you can select it as text, that's a yes.",
+    fix:"Put the price in plain text on every product page.", fixWhy:"Without a readable price, an assistant can't quote you or compare you." },
+  { id:"stock", rank:2, tag:"Product pages",
+    q:"Does every product page show whether it's in stock, and is that correct today?",
+    why:"Google's Universal Cart sends shoppers price and stock alerts. Agents filter out anything that doesn't say it can ship, and they don't give the benefit of the doubt.",
+    src:{t:"Google, Oct 2026", u:"https://blog.google/products-and-platforms/products/shopping/universal-cart-launch/"},
+    check:"<b>How to check:</b> pick three products, including one you know is out. Does each page say so in words?",
+    fix:"Show in-stock or out-of-stock in words on every product page, and keep it current.", fixWhy:"Wrong or missing stock is the fastest way to be filtered out." },
+  { id:"names", rank:3, tag:"Everywhere you sell",
+    q:"Is each product named and described the same way everywhere it's sold?",
+    why:"Your site, Amazon, Walmart, a grocer's site, Google. A person assumes two slightly different names are the same jar. An assistant may list them as two products, or make up a third.",
+    check:"<b>How to check:</b> search your best seller's name on each place it's listed and put the names side by side.",
+    fix:"Pick one name and one short description per product, and use them everywhere.", fixWhy:"One mismatch can be enough for an assistant to list the wrong lineup." },
+  { id:"ship", rank:4, tag:"Policies",
+    q:"Are shipping cost and delivery time written on your site, before checkout?",
+    why:"\"Who can get me this by Friday\" is a question people now ask an assistant out loud. If the answer is only revealed at checkout, an agent can't use it.",
+    check:"<b>How to check:</b> without adding anything to your cart, can you find what shipping costs and how long it takes?",
+    fix:"Add a plain shipping line: cost, free-shipping threshold if any, and typical delivery days.", fixWhy:"Agents compare on delivery. Silence reads as slow." },
+  { id:"returns", rank:6, tag:"Policies",
+    q:"Is your return policy on its own page that someone can link to?",
+    why:"Assistants that buy for someone are cautious by design. Meta's and Anthropic's ask the shopper before paying, and a clear return policy is part of what makes a yes easy.",
+    src:{t:"TechCrunch, Oct 2026", u:"https://techcrunch.com/2026/10/22/claude-duet-app-is-anthropics-bet-on-agents/"},
+    check:"<b>How to check:</b> look in your footer for a Returns or Refunds link that opens its own page.",
+    fix:"Give your return policy its own page, linked from the footer.", fixWhy:"It's a short page and it removes a reason to hesitate." },
+  { id:"robots", rank:5, tag:"Your site settings",
+    q:"Is your site letting AI assistants read it?",
+    why:"Some sites block AI crawlers by default, often without the owner knowing. A blocked assistant can't cite you, and it falls back on whatever other sites say about you.",
+    check:"<b>How to check:</b> go to yoursite.com/robots.txt. Look for names like OAI-SearchBot, ChatGPT-User, PerplexityBot or ClaudeBot next to the word Disallow. If none of them are there, that's a yes.",
+    fix:"Ask whoever runs your site whether blocking AI assistants was a deliberate choice. If it wasn't, remove the block.", fixWhy:"You can't be recommended by something you've locked out." },
+  { id:"google", rank:7, tag:"Listings",
+    q:"Are your products listed in Google Merchant Center?",
+    why:"It's the free product feed behind Google's shopping results, and Google is putting Search and Gemini behind one cart. Shopify, Squarespace and WooCommerce can all send your catalog to it.",
+    src:{t:"Google, Oct 2026", u:"https://blog.google/products-and-platforms/products/shopping/universal-cart-launch/"},
+    check:"<b>How to check:</b> search Google for merchants.google.com and sign in with your business account. If you've never set it up, it's a no.",
+    fix:"Connect your store to Google Merchant Center. It's free and most store platforms do it in a few clicks.", fixWhy:"It's the most direct route into Google's shopping results." },
+  { id:"schema", rank:8, tag:"Product pages",
+    q:"Do your product pages carry product data that machines can read?",
+    why:"Behind the visible page, most store platforms can add a small block that says, in a standard format, this is a product, here's the price, here's whether it's in stock. Assistants and search engines read it directly.",
+    check:"<b>How to check:</b> paste a product page link into Google's Rich Results Test (search for that name). If it finds a Product with a price, that's a yes.",
+    fix:"Turn on or repair your product's structured data. Most current store themes include it.", fixWhy:"It's how a machine is sure the price it read is the price." },
+  { id:"shopify", rank:9, tag:"If you sell on Shopify", na:true,
+    q:"If you're on Shopify, have you checked whether your store is set up for Agentic Storefronts?",
+    why:"Shopify now lets stores sell inside ChatGPT, with Copilot, Google AI Mode and Gemini in early access. The sale still completes on your own store.",
+    src:{t:"Shopify, 2026", u:"https://www.shopify.com/news/agentic-commerce-momentum"},
+    check:"<b>How to check:</b> look in your Shopify admin for the AI or agentic sales channels, or ask Shopify support whether your store is included. Not on Shopify? Pick Not my platform.",
+    fix:"Check whether your Shopify store is eligible for Agentic Storefronts, and turn it on if it is.", fixWhy:"It's a route into AI chats with nothing to build." },
+  { id:"ask", rank:10, tag:"The real test",
+    q:"Have you asked ChatGPT about your category, without using your business name, and seen whether you come up?",
+    why:"This is the question that matters most: \"what's the best [what you sell] in [your city]\" or \"best [what you sell] for [use].\" If you don't show up and competitors do, that's where the customers are going.",
+    check:"<b>How to check:</b> open a fresh chat at chatgpt.com and ask it the way a customer would. Then ask it about you by name and check every fact it states.",
+    fix:"Ask an assistant about your category and about you by name. Write down who it names and anything it gets wrong.", fixWhy:"Ten minutes, and it shows you exactly where you stand." }
+];
+
+const STORE = "agent-ready-check-v1";
+let A = {};
+try{ A = JSON.parse(localStorage.getItem(STORE)||"{}")||{}; }catch(e){ A = {}; }
+const save = ()=>{ try{ localStorage.setItem(STORE, JSON.stringify(A)); }catch(e){} };
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+document.getElementById("qs").innerHTML = Q.map(x=>{
+  const opts = [["yes","Yes"],["no","No"],["unsure","Not sure"]].concat(x.na?[["na","Not my platform"]]:[]);
+  return `<li class="q" id="q-${x.id}">
+    <div>
+      <div class="tag">${x.tag}</div>
+      <h2 id="h-${x.id}">${x.q}</h2>
+      <p class="w">${x.why}</p>
+      <p class="chk">${x.check}</p>
+      ${x.src?`<div class="src">Based on: <a href="${x.src.u}" target="_blank" rel="noopener">${x.src.t}</a></div>`:""}
+      <div class="opts" role="radiogroup" aria-labelledby="h-${x.id}">
+        ${opts.map(([v,l])=>`<label><input type="radio" name="${x.id}" value="${v}"${A[x.id]===v?" checked":""}><span>${l}</span></label>`).join("")}
+      </div>
+    </div>
+  </li>`;
+}).join("");
+
+document.getElementById("qs").addEventListener("change", e=>{
+  if(e.target.name){ A[e.target.name]=e.target.value; save(); render(); }
+});
+
+function render(){
+  Q.forEach(x=>document.getElementById("q-"+x.id).classList.toggle("done", !!A[x.id]));
+  const scored = Q.filter(x=>A[x.id]!=="na");
+  const answered = Q.filter(x=>A[x.id]).length;
+  const yes = scored.filter(x=>A[x.id]==="yes").length;
+  const todo = scored.filter(x=>A[x.id]==="no"||A[x.id]==="unsure").sort((a,b)=>(A[a.id]==="no"?0:1)-(A[b.id]==="no"?0:1)||a.rank-b.rank);
+  const R = document.getElementById("result");
+
+  if(!answered){
+    R.innerHTML = `<h2>Your result</h2><p class="empty">Answer the questions above and your fix list builds here as you go.</p>`;
+    return;
+  }
+  const first = todo[0];
+  const meter = Q.map(x=>`<i class="${A[x.id]&&A[x.id]!=="na"?A[x.id]:""}"></i>`).join("");
+  const left = Q.length-answered;
+  R.innerHTML = `
+    <h2>Your result</h2>
+    <div class="score"><span class="n">${yes}/${scored.length}</span>
+      <span class="of">basics in place${left?`, with ${left} question${left>1?"s":""} still to answer`:""}.
+      Not sure counts as a no until you've checked.</span></div>
+    <div class="meter" aria-hidden="true">${meter}</div>
+    ${first?`
+      <div class="first"><div class="lbl">Do this first</div>
+        <h3>${esc(first.fix)}</h3><p>${esc(first.fixWhy)}</p></div>
+      ${todo.length>1?`<ul class="fixes">${todo.slice(1).map(x=>`<li class="${A[x.id]==="unsure"?"u":""}"><b>${esc(x.fix)}</b><span>${esc(x.fixWhy)}</span></li>`).join("")}</ul>`:""}`
+    : `<div class="first"><div class="lbl" style="color:var(--yes)">Nothing to fix on this list</div>
+        <h3>The basics are in place.</h3><p>Re-run question 10 every month or two. What assistants say about you changes as they pull from new sources.</p></div>`}
+    <p class="watch"><b>Not yet, but watch:</b> Meta and Sierra have published a draft standard, backed by OpenAI, Visa, Shopify, Walmart and others, where a business puts one small file on its site telling agents how they may act for a customer. There's nothing to do while it's a draft. <a href="https://sierra.ai/blog/poppy" target="_blank" rel="noopener">Sierra, Oct 2026</a></p>
+    <div class="actions">
+      <button type="button" id="copy">Copy my fix list</button>
+      <button type="button" class="ghost" id="print">Print or save as PDF</button>
+      <button type="button" class="ghost" id="reset">Start over</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>`;
+
+  document.getElementById("copy").onclick = ()=>{
+    const lines = [`Agent-ready store check: ${yes}/${scored.length} basics in place.`, ""];
+    if(todo.length){ lines.push("Fixes, most important first:"); todo.forEach((x,i)=>lines.push(`${i+1}. ${x.fix}${A[x.id]==="unsure"?" (not sure yet, check first)":""}`)); }
+    else lines.push("No fixes on the list.");
+    lines.push("", location.href.split("#")[0]);
+    const txt = lines.join("\n"), msg = document.getElementById("copied");
+    const ok = ()=>{ msg.textContent="Copied"; setTimeout(()=>msg.textContent="",2200); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,()=>fallback(txt,ok)); } else fallback(txt,ok);
+  };
+  document.getElementById("print").onclick = ()=>window.print();
+  document.getElementById("reset").onclick = ()=>{
+    A={}; save(); document.querySelectorAll(".opts input").forEach(i=>i.checked=false); render();
+    document.getElementById("qs").scrollIntoView({behavior:"smooth"});
+  };
+}
+function fallback(t,ok){
+  const ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); ok(); }catch(e){} ta.remove();
+}
+render();
+</script>
+</body>
+</html>
