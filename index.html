@@ -123,6 +123,18 @@ h3{font-size:22px;line-height:1.15;font-weight:700;font-stretch:80%;letter-spaci
 .close{font-size:20px;line-height:1.58;max-width:62ch;margin:40px 0 0;}
 
 /* ============================================================
+   THESIS: the claim, what to expect, and the season scorecard
+   ============================================================ */
+.claim{font-size:clamp(24px,2.7vw,31px);line-height:1.36;max-width:36ch;margin:0 0 20px;text-wrap:pretty;}
+.claim-note{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:60ch;margin:0 0 48px;}
+.expect{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin:0 0 64px;padding:0;list-style:none;}
+.expect li{padding:14px 20px 0 0;}
+.expect li+li{padding-left:20px;border-left:1px solid var(--hair);}
+.expect .t{font-family:var(--f-ui);font-size:13.5px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--fc);}
+.expect p{font-size:16px;line-height:1.5;color:var(--ink-2);margin:6px 0 0;}
+.pending{color:var(--ink-3);font-style:italic;font-weight:400;}
+
+/* ============================================================
    LADDER: a track of five stations. Passed stations solid,
    the current one struck forward, stations still ahead ghosted.
    ============================================================ */
@@ -268,9 +280,14 @@ footer li b{color:var(--ink);}
   .fc{grid-template-columns:200px minmax(0,1fr) 96px;column-gap:20px;}
   .steps ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 28px;}
   .cols2{grid-template-columns:1fr;gap:28px;}
+  .expect{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .expect li:nth-child(3){padding-left:0;border-left:0;}
 }
 @media (max-width:700px){
   :root{--gut:18px;}
+  .expect{grid-template-columns:1fr;border-top:0;}
+  .expect li,.expect li+li{padding:12px 0 14px;border-left:0;border-top:1px solid var(--hair);}
+  .expect li:first-child{border-top:1px solid var(--ink);}
   body{font-size:17px;}
   section{padding-top:76px;}
   .runhead .wrap{gap:14px;height:44px;padding-top:12px;font-size:13.5px;}
@@ -417,6 +434,7 @@ footer li b{color:var(--ink);}
     </div>
     <nav class="contents" aria-label="Sections">
       <ul>
+        <li><a href="#thesis">The thesis</a></li>
         <li><a href="#ladder">The behavior ladder</a></li>
         <li><a href="#path">What changes structurally</a></li>
         <li><a href="#moving">What's moving</a></li>
@@ -439,6 +457,9 @@ footer li b{color:var(--ink);}
 </header>
 
 <main class="wrap" id="main">
+
+  <!-- ===================== THESIS ===================== -->
+  <section id="thesis"></section>
 
   <!-- ===================== LADDER ===================== -->
   <section id="ladder">
@@ -585,6 +606,32 @@ footer li b{color:var(--ink);}
 const D = {
 
   asOf: "November 2026",
+
+  /* ---- Thesis and season scorecard ----------------------------------
+     watch rows are written down BEFORE the results come out. Fill in
+     `actual` (with its source) when the number is published; never
+     change `expected` after the fact.                                  */
+  thesis:{
+    head:"The thesis",
+    note:"What this page argues, and what to expect from it",
+    claim:"Shopping is moving from people searching to assistants shortlisting. An assistant can only recommend what it can read, and most businesses aren't readable yet. Fixing that is cheap now. It won't stay cheap.",
+    claimNote:"This is early. By Mastercard's estimate, agents carry about 0.2% of e-commerce value today. This page tracks whether that changes and how fast. It isn't here to cheer for it.",
+    expect:[
+      { t:"Every week", d:"New moves added to What's moving, each dated and linked to its source." },
+      { t:"Every season", d:"A scorecard. The forecast is written down first, then what actually happened goes next to it." },
+      { t:"Every number", d:"Labelled for what it is. A company counting its own users, a survey and a measured transaction are kept apart." },
+      { t:"For store owners", d:"A free 15-minute check: <a href=\"check.html\">can an AI assistant sell your product?</a>" }
+    ],
+    watchHead:{ title:"Holiday scorecard, 2026", k:"Written down before Black Friday. Filled in as results are published." },
+    watch:[
+      { what:"Traffic to US retail sites from shoppers clicking through from AI tools, November 1 to December 31, versus last year",
+        expected:"+130%", actual:"", src:"Adobe forecast, Sep 2026", url:"https://news.adobe.com/news/2026/09/adobe-us-holiday-shopping-season-to-hit-record" },
+      { what:"Walmart's Agent Profiles live, letting each customer approve every purchase or set a spending limit per agent",
+        expected:"November", actual:"", src:"TechCrunch, Oct 2026", url:"https://techcrunch.com/2026/10/21/while-amazon-blocks-ai-agents-walmart-rolls-out-the-welcome-mat/" },
+      { what:"Agents' share of all e-commerce value",
+        expected:"About 0.2% today", actual:"", pendingText:"No scheduled update. Any new measurement goes here.", src:"Mastercard", url:"" }
+    ]
+  },
 
   /* ---- Hero curve ------------------------------------------------ */
   curve:{
@@ -1024,6 +1071,35 @@ $$(".chain").forEach(el=>{
     return `<span class="step">${i?ARROW:""}<span class="lbl${hl?" hl":""}">${txt}</span></span>`;
   }).join("");
 });
+
+/* ---- Thesis ------------------------------------------------------ */
+(function(){
+  const t = D.thesis;
+  $("#thesis").innerHTML = `
+    <header class="sh">
+      <h2>${t.head}</h2>
+      <p class="note">${t.note}</p>
+    </header>
+    <p class="claim">${t.claim}</p>
+    <p class="claim-note">${t.claimNote}</p>
+    <ul class="expect">${t.expect.map(e=>`<li><div class="t">${e.t}</div><p>${e.d}</p></li>`).join("")}</ul>
+    <div class="ladder-hd"><h3>${t.watchHead.title}</h3><div class="k">${t.watchHead.k}</div></div>
+    <table class="rec" id="watch-table" style="margin-top:18px">
+      <thead><tr>
+        <th style="width:44%">What we're watching</th>
+        <th style="width:16%">Expected</th>
+        <th style="width:20%">Actual</th>
+        <th style="width:20%">Source</th>
+      </tr></thead>
+      <tbody>${t.watch.map(w=>`
+        <tr>
+          <td class="lab full">${w.what}</td>
+          <td class="num" data-l="Expected">${w.expected}</td>
+          <td class="lab" data-l="Actual">${w.actual || `<span class="pending">${w.pendingText || "Pending"}</span>`}</td>
+          <td class="q full">${w.url ? `<a href="${w.url}" target="_blank" rel="noopener">${w.src}</a>` : w.src}</td>
+        </tr>`).join("")}</tbody>
+    </table>`;
+})();
 
 /* ---- What's moving ----------------------------------------------- */
 $("#moving").innerHTML = `
