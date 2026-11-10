@@ -615,6 +615,9 @@ const D = {
     head:"The thesis",
     note:"What this page argues, and what to expect from it",
     claim:"Shopping is moving from people searching to assistants shortlisting. An assistant can only recommend what it can read, and most businesses aren't readable yet. Fixing that is cheap now. It won't stay cheap.",
+    /* Must stay true. If a platform or vendor ever pays for this page,
+       change or remove this line in the same change that starts it. */
+    independence:"<b>Independent.</b> No platform or vendor pays for this page, and there's no software for sale here.",
     claimNote:"This is early. By Mastercard's estimate, agents carry about 0.2% of e-commerce value today. This page tracks whether that changes and how fast. It isn't here to cheer for it.",
     expect:[
       { t:"Every week", d:"New moves added to What's moving, each dated and linked to its source." },
@@ -1088,7 +1091,8 @@ $$(".chain").forEach(el=>{
       <p class="note">${t.note}</p>
     </header>
     <p class="claim">${t.claim}</p>
-    <p class="claim-note">${t.claimNote}</p>
+    <p class="claim-note" style="margin-bottom:12px">${t.claimNote}</p>
+    <p class="claim-note">${t.independence}</p>
     <ul class="expect">${t.expect.map(e=>`<li><div class="t">${e.t}</div><p>${e.d}</p></li>`).join("")}</ul>
     <div class="ladder-hd"><h3>${t.watchHead.title}</h3><div class="k">${t.watchHead.k}</div></div>
     <table class="rec" id="watch-table" style="margin-top:18px">

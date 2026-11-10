@@ -34,7 +34,8 @@ Live at https://james-bonaguro.github.io/agentic-commerce-briefing/ (GitHub Page
 2. No invented numbers. Forecasts, surveys and measurements are labelled as different things.
 3. Plain English for a store owner, not for people in tech. No em dashes.
 4. No tracking, no outside requests, no build step. The pages must work as plain files.
-5. Checked before merge in headless Chromium at phone (390px) and desktop (1280px) widths: no console errors, no outside requests, no sideways scroll.
+5. The "Independent" line in `D.thesis.independence` must stay true. If a platform or vendor ever pays for this page, that line changes in the same pull request.
+6. Checked before merge in headless Chromium at phone (390px) and desktop (1280px) widths: no console errors, no outside requests, no sideways scroll.
 
 ## How it updates
 
