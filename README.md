@@ -18,6 +18,7 @@ AI assistants are starting to shop for people. Google, Walmart, Shopify and Meta
 
 ## How it's kept honest
 
+- Independent. No platform or vendor pays for this, and there's no software for sale here.
 - Every entry in "What's moving" links to the original report or the company's own announcement.
 - Measured numbers, surveys and forecasts are labelled as different things, because they are.
 - Agent-driven sales are small today. The briefing says so. The case for acting now is that the fixes are cheap and they help ordinary search and real customers in the meantime.
