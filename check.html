@@ -185,7 +185,7 @@ const Q = [
     fix:"Give your return policy its own page, linked from the footer.", fixWhy:"It's a short page and it removes a reason to hesitate." },
   { id:"robots", rank:5, tag:"Your site settings",
     q:"Is your site letting AI assistants read it?",
-    why:"Some sites block AI crawlers and agents by default, often without the owner knowing. A blocked assistant can't cite you, and the shopper who sent it never reaches you. Cloudflare now lets sites block or allow shoppers' assistants by name, separately from other bots.",
+    why:"Some sites block AI crawlers and agents by default, often without the owner knowing. A blocked assistant can't cite you, and the shopper who sent it never reaches you. Cloudflare now lets sites block or allow shoppers' assistants by name, separately from other bots, and OpenAI warns that some sites block its new shopping wallet without meaning to.",
     src:{t:"Cloudflare, Nov 2026", u:"https://blog.cloudflare.com/personal-agents-visibility-control/"},
     check:"<b>How to check:</b> go to yoursite.com/robots.txt. Look for names like OAI-SearchBot, ChatGPT-User, PerplexityBot or ClaudeBot next to the word Disallow. If your site runs through Cloudflare (whoever set up your site will know), also look in its Security Settings under AI Crawler and Agent access policies. If nothing there blocks assistants or agents, that's a yes.",
     fix:"Ask whoever runs your site whether blocking AI assistants, in robots.txt or in Cloudflare's agent settings, was a deliberate choice. If it wasn't, remove the block.", fixWhy:"You can't be recommended by something you've locked out." },
@@ -266,7 +266,7 @@ function render(){
       ${todo.length>1?`<ul class="fixes">${todo.slice(1).map(x=>`<li class="${A[x.id]==="unsure"?"u":""}"><b>${esc(x.fix)}</b><span>${esc(x.fixWhy)}</span></li>`).join("")}</ul>`:""}`
     : `<div class="first"><div class="lbl" style="color:var(--yes)">Nothing to fix on this list</div>
         <h3>The basics are in place.</h3><p>Re-run question 10 every month or two. What assistants say about you changes as they pull from new sources.</p></div>`}
-    <p class="watch"><b>Not yet, but watch:</b> Meta and Sierra have published a draft standard, backed by OpenAI, Visa, Shopify, Walmart and others, where a business puts one small file on its site telling agents how they may act for a customer. There's nothing to do while it's a draft. <a href="https://sierra.ai/blog/poppy" target="_blank" rel="noopener">Sierra, Oct 2026</a></p>
+    <p class="watch"><b>Worth knowing:</b> a new standard called Poppy has a business put one small file on its site telling agents how they may act for a customer. Meta's Muse looks for it first. If you sell on Shopify, your store already publishes it. On other platforms it's early, so it's a question for whoever runs your site, not a must-do yet. <a href="https://sierra.ai/blog/releasing-poppy" target="_blank" rel="noopener">Sierra, Nov 2026</a></p>
     <div class="actions">
       <button type="button" id="copy">Copy my fix list</button>
       <button type="button" class="ghost" id="print">Print or save as PDF</button>
